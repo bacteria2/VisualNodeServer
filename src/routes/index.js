@@ -1,9 +1,13 @@
-var express = require('express');
-var router = express.Router();
+let requireDirectory = require('require-directory');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-module.exports = router;
+let include = function(path){
+    return /\.route\.js$/.test(path);
+  },
+  rename = function(name) {
+    return name.replace('.route','');
+  };
+
+
+
+module.exports = requireDirectory(module,{include,rename});
