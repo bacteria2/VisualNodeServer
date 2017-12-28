@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 .idea/*
+/lib/*
 
 npm-debug.log*
 yarn-debug.log*
