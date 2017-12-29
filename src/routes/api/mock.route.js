@@ -58,4 +58,4 @@ router.get('/feature/:id', function(req, res, next) {
     res.json({msg:"error id is not in range",code:400});
 });
 
-module.exports = router;
+module.exports.router = router;

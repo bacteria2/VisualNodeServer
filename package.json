@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev-start": "node ./lib/server.js",
+    "dev-start": "node ./node_modules/babel-cli/bin/babel-node.js ./src/server.js",
     "clean": "node ./script/clean.js",
     "start": "node ./lib/server.js production",
     "compile": "babel src -d lib",
@@ -27,7 +27,8 @@
     "serve-favicon": "~2.4.2",
     "winston": "^3.0.0-rc1"
   },
-  "devDependencies": {
+  "devDependencies": {  
+    "babel-cli": "^6.26.0",   
     "babel-core": "^6.25.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-polyfill": "^6.26.0",

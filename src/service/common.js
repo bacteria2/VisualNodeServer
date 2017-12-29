@@ -1,30 +1,37 @@
-import momont from 'moment';
+let  moment=require( 'moment');
 
-export function insertManyPreProcessor(arg){
+ function insertManyPreProcessor(arg){
     if(Array.isArray){
         arg=arg.map(el=>insertPreProcessor(el))
     }   
   return arg
 }
 
-export function insertPreProcessor(arg){    
+ function insertPreProcessor(arg){    
   return {
     ...arg,
-    insertTime:momont().format(),
+    insertTime:moment().format(),
     updateTime:moment().format(),
   }
 }
 
-export function updateManyPreProcessor(arg){
+ function updateManyPreProcessor(arg){
     if(Array.isArray){
         arg=arg.map(el=>updatePreProcessor(el))
     }   
   return arg
 }
 
-export function updatePreProcessor(arg){
+ function updatePreProcessor(arg){
     return {
         ...arg,        
         updateTime:moment().format(),
     }
+}
+
+module.exports={
+    insertManyPreProcessor,
+    insertPreProcessor,
+    updateManyPreProcessor,
+    updatePreProcessor
 }

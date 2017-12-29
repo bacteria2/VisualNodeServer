@@ -1,28 +1,34 @@
-import  express from 'express';
-import {success} from "../../common"
+let  express =require( 'express');
+let {success} =require( "../../common");
 
 
 let router = express.Router();
 
 /**POST insert new widget*/
-router.get('/insert', function(req, res, next) {
-  let widget=req.body;  
+router.post('/insert', function(req, res, next) {
+  let widget=req.body; 
   req.app.locals.mongoDispatch({
     type:'widgets.insertOneWidget',
     payload:widget
-  }).then(resp=>{
-    res.json(success({insertNum:resp.insertedCount}),"数据插入成功");
+  }).then(resp=>{    
+    res.status(resp.code).json(resp);
   })  
 });
 
 
 /* GET widgetById listing. */
 router.get('/:id', function(req, res, next) {
+  
   req.app.locals.mongoDispatch({
     type:'widgets.getWidgetById',
     payload:req.params.id
   })
-  res.send('respond with a resource');
+
+  .then(resp=>{    
+     res.status(resp.code).json(resp);     
+  })
 });
 
-export default router;
+module.exports={
+  router
+}

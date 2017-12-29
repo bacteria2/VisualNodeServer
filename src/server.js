@@ -13,7 +13,7 @@ if(process.argv.length>0&&process.argv[0]=='production'){
     process.env.NODE_ENV = 'development';
   }
     
-  var app = require('./app').default;
+  var app = require('./app');
   var {port} =require('./config');
   var debug = require('debug')('visual-node-server:server');
   var http = require('http');
@@ -40,7 +40,7 @@ if(process.argv.length>0&&process.argv[0]=='production'){
   server.on('error', onError);
   server.on('listening', onListening);
   
-  console.log(1111111111)
+  
 
   /**
    * Normalize a port into a number, string, or false.
@@ -100,5 +100,6 @@ if(process.argv.length>0&&process.argv[0]=='production'){
       ? 'pipe ' + addr
       : 'port ' + addr.port;
     debug('Listening on ' + bind);
+    console.log('listening')
   }
   

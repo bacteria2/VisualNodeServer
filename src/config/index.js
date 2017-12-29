@@ -1,5 +1,5 @@
 const development={
-    apiPrefix:"/map/api/",
+    apiPrefix:"/visual/",
     port:8033, 
     proxyTable: {},
     mongodbUrl:"mongodb://192.168.40.161:27017",
@@ -10,7 +10,7 @@ const development={
 }
 
 const production={
-    apiPrefix:"/map/api/",
+    apiPrefix:"/visual/",
     port:8033, 
     proxyTable: {},
     mongodbUrl:"mongodb://192.168.40.161:27017",
