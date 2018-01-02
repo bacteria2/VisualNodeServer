@@ -17,13 +17,11 @@ router.post('/insert', function(req, res, next) {
 
 
 /* GET widgetById listing. */
-router.get('/:id', function(req, res, next) {
-  
+router.get('/:id', function(req, res, next) {  
   req.app.locals.mongoDispatch({
     type:'widgets.getWidgetById',
     payload:req.params.id
   })
-
   .then(resp=>{    
      res.status(resp.code).json(resp);     
   })

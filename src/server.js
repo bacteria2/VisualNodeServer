@@ -1,36 +1,35 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
-if(process.argv.length>0&&process.argv[0]=='production'){
-    console.log('pro')
+if(process.argv.length>0&&process.argv[2]=='production'){
+    console.log('production')
     process.env.BABEL_ENV = 'production';
     process.env.NODE_ENV = 'production';
   }else{
-    console.log('dev')
+    console.log('development')
     process.env.BABEL_ENV = 'development';
     process.env.NODE_ENV = 'development';
   }
+
     
-  var app = require('./app');
-  var {port} =require('./config');
-  var debug = require('debug')('visual-node-server:server');
-  var http = require('http');
+  let app = require('./app');
+  let {port} = require('./config');
+  let debug = require('debug')('visual-node-server:server');
+  let http = require('http');
   
   
   /**
    * Get port from environment and store in Express.
    */
   
-  var port = normalizePort(port|| '3000');
+  port = normalizePort(port|| '3000');
   app.set('port', port);
   //app.listen(port)
   /**
    * Create HTTP server.
    */
   
-  var server = http.createServer(app);
+  let server = http.createServer(app);
   
   /**
    * Listen on provided port, on all network interfaces.
@@ -47,7 +46,7 @@ if(process.argv.length>0&&process.argv[0]=='production'){
    */
   
   function normalizePort(val) {
-    var port = parseInt(val, 10);
+    let port = parseInt(val, 10);
   
     if (isNaN(port)) {
       // named pipe
@@ -96,9 +95,7 @@ if(process.argv.length>0&&process.argv[0]=='production'){
   
   function onListening() {
     var addr = server.address();
-    var bind = typeof addr === 'string'
-      ? 'pipe ' + addr
-      : 'port ' + addr.port;
+    var bind = typeof addr === 'string'? 'pipe ' + addr: 'port ' + addr.port;
     debug('Listening on ' + bind);
     console.log('listening')
   }
