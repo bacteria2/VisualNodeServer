@@ -32,14 +32,14 @@ describe('test/app/service/user.test.js', () => {
 
     const ctx = app.mockContext();
     // invoke service
-    const user = await ctx.service.user.findUserById(mockUser.userid); 
+    const user = await ctx.service.user.findUserById(mockUser.userid);
     assert(user.userid === mockUser.userid);
     assert(user.notifyCount === mockUser.notifyCount);
     assert(user.name === mockUser.name);
     assert(user.avatar === mockUser.avatar);
   });
 
-  it('remove User test', async () => {     
+  it('remove User test', async () => {
     const ctx = app.mockContext();
     // invoke service
     const resp = await ctx.service.user.deleteOne(mockUser.userid);
