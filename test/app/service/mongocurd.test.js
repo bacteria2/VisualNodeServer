@@ -1,6 +1,7 @@
 'use strict';
 
 const { app, assert } = require('egg-mock/bootstrap');
+const ejs = require('ejs'), fs = require('fs');
 
 describe('test/app/service/mongocurd.test.js', () => {
   it('list user', async () => {
@@ -27,5 +28,17 @@ describe('test/app/service/mongocurd.test.js', () => {
     const query = { name: 'test2' };
     const result = await ctx.service.mongocurd.update(query, { $set: { name: 'tryrtyr' } });
     console.log(`成功更新记录数：${result}`);
+    await ctx.service.mongocurd.delete({ name: 'tryrtyr' });
+  });
+
+  it('ejs test', async () => {
+    // 同步读取模板内容
+    const str = fs.readFileSync('./test/app/service/list.ejs', 'utf8');
+    // 使用EJS进行转换
+    const ret = ejs.render(str, {
+      names: [ 'foo', 'bar', 'baz' ],
+    });
+
+    console.log(ret);
   });
 });
