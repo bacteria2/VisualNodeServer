@@ -7,7 +7,6 @@ class UserController extends BaseController {
     const { service } = this;
     const user = await service.user.findUserById('100002');
 
-    console.log(user);
     if (user) {
       this.success(user);
     } else {
@@ -18,7 +17,7 @@ class UserController extends BaseController {
 
   async accountLogin() {
     const user = this.request.body;
-    console.log(user);
+
     this.success(user);
   }
 }

@@ -7,9 +7,10 @@
 module.exports = app => {
   const { router, controller, config: { restApi: { prefix } } } = app;
   router.redirect('/', '/index.html', 302);
+  router.get('/visual/resource',controller.resource.get);
   router.get(prefix + '/user/currentUser', controller.api.user.currentUser);
   router.post(prefix + '/login/account', controller.api.user.accountLogin);
-  router.get(prefix + '/widget/:id', controller.api.widget.getWidget);
+  router.get(prefix + '/widget/:id', controller.api.widget.get);
   // Start template
   router.post(prefix + '/template/add', controller.api.template.addTemplate);
   router.post(prefix + '/template/getAll', controller.api.template.getTemplates);
@@ -22,4 +23,5 @@ module.exports = app => {
   router.post(prefix + '/prototype/getPrototypeById', controller.api.prototypes.getPrototypeById);
   router.post(prefix + '/prototype/update', controller.api.prototypes.updatePrototype);
   // End prototype
+
 };

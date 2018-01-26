@@ -8,7 +8,9 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1515641127523_735';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = [
+      'accessLog'
+  ];
   config.cluster = {
     listen: {
       port: 8033,
