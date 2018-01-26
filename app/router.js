@@ -1,14 +1,17 @@
 'use strict';
-
-/**
- * @param {Egg.Application} app - egg application
- */
+const dsRouter  = require('./router/datasourceRouter');
 
 module.exports = app => {
+
   const { router, controller, config: { restApi: { prefix } } } = app;
+
   router.redirect('/', '/index.html', 302);
   router.get('/visual/resource',controller.resource.get);
   router.get(prefix + '/user/currentUser', controller.api.user.currentUser);
+
+  //数据源路由
+  dsRouter(app);
+
   router.post(prefix + '/login/account', controller.api.user.accountLogin);
   router.get(prefix + '/widget/:id', controller.api.widget.get);
   // Start template

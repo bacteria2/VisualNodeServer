@@ -12,9 +12,9 @@ class BaseController extends Controller {
     return this.app.mongo.db;
   }
 
-  success(data) {
+  success(data,msg='') {
     this.ctx.body = {
-      msg: '',
+      msg,
       success: true,
       code: 200,
       data,

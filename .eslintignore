@@ -1,1 +1,5 @@
 coverage
+/app/**
+/test/**
+/config/**
+/node_modules/**
