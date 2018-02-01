@@ -13,7 +13,10 @@ module.exports = app => {
   dsRouter(app);
 
   router.post(prefix + '/login/account', controller.api.user.accountLogin);
+  // Start widget
   router.get(prefix + '/widget/:id', controller.api.widget.get);
+  router.get(prefix + '/widget/propertyPages/:name/:index', controller.api.widget.getPropertyPage);
+  // End widget
   // Start template
   router.post(prefix + '/template/add', controller.api.template.addTemplate);
   router.post(prefix + '/template/getAll', controller.api.template.getTemplates);
@@ -25,6 +28,6 @@ module.exports = app => {
   router.post(prefix + '/prototype/getAll', controller.api.prototypes.getPrototypes);
   router.post(prefix + '/prototype/getPrototypeById', controller.api.prototypes.getPrototypeById);
   router.post(prefix + '/prototype/update', controller.api.prototypes.updatePrototype);
+  router.get(prefix + '/prototype/meta/:id', controller.api.prototypes.getUiMeta);
   // End prototype
-
 };

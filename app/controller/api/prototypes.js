@@ -44,6 +44,16 @@ class PrototypeController extends BaseController {
     }
   }
 
+  async getUiMeta() {
+    const { service, ctx } = this;
+    const response = await service.prototypes.getUiMeta(ctx.params.id);
+    if (response) {
+      this.success(response);
+    } else {
+      this.error(response, '失败');
+    }
+  }
+
 }
 
 module.exports = PrototypeController;

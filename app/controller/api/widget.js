@@ -15,6 +15,18 @@ class WidgetController extends BaseController {
       this.notFound();
     }
   }
+
+  async getPropertyPage() {
+    const { service, ctx: { params } } = this;;
+    const i = params.index
+    const page = await service.widget.getPropertyPage(params.name);
+    if (page) {
+      const defineStr = JSON.stringify(page.define).replace(/\${i}/g, i);
+      this.success(JSON.parse(defineStr));
+    } else {
+      this.notFound();
+    }
+  }
 }
 
 module.exports = WidgetController;

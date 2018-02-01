@@ -31,6 +31,12 @@ class TemplateService extends Service {
     return t;
   }
 
+  async getTemplatesByNames(names) {
+    const collection = this.app.mongo.db.collection('template');
+    const templates = await collection.find({ name: { $in: names } }, { _id: 0, define: 1 }).toArray();
+    return templates.map(item => { return item.define; });
+  }
+
 }
 
 module.exports = TemplateService;
