@@ -27,6 +27,11 @@ class WidgetController extends BaseController {
       this.notFound();
     }
   }
+
+  async getWidgetList(){
+      const { service, ctx: { params } } = this;
+      return  this.success(await service.widget.getWidgetList());
+  }
 }
 
 module.exports = WidgetController;

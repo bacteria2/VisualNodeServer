@@ -1,5 +1,5 @@
 'use strict';
-const historyFallback = require('koa2-history-api-fallback')
+const historyFallback = require('koa2-history-api-fallback');
 const start = Date.now();
 
 module.exports = app => {

@@ -6,7 +6,7 @@ module.exports = app => {
   const { router, controller, config: { restApi: { prefix } } } = app;
 
   router.redirect('/', '/index.html', 302);
-  router.get('/visual/resource',controller.resource.get);
+  router.get('/visual/resource', controller.resource.get);
   router.get(prefix + '/user/currentUser', controller.api.user.currentUser);
 
   //数据源路由
@@ -14,7 +14,8 @@ module.exports = app => {
 
   router.post(prefix + '/login/account', controller.api.user.accountLogin);
   // Start widget
-  router.get(prefix + '/widget/:id', controller.api.widget.get);
+  router.get(prefix + '/widget/instance/:id', controller.api.widget.get);
+  router.get(prefix + '/widget/list', controller.api.widget.getWidgetList);
   router.get(prefix + '/widget/propertyPages/:name/:index', controller.api.widget.getPropertyPage);
   // End widget
   // Start template

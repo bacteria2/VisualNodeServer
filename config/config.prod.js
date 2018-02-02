@@ -1,7 +1,7 @@
 'use strict';
+const path = require('path');
 
-
-exports.mongo = {
+exports.mongo =app=>( {
   client: {
     host: '192.168.40.161',
     port: '27017',
@@ -10,5 +10,6 @@ exports.mongo = {
   logger: {
     level: 'INFO',
     consoleLevel: 'NONE',
+    dir: path.join(appInfo.baseDir, 'logs'),
   },
-};
+});

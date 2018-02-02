@@ -9,15 +9,12 @@ module.exports = appInfo => {
 
   // add your config here
   config.middleware = [
-      'accessLog'
+    'accessLog',
   ];
   config.cluster = {
     listen: {
       port: 8033,
     },
-  };
-  config.logger = {
-    dir: path.join(appInfo.baseDir, 'logs'),
   };
   config.static = {
     prefix: '',

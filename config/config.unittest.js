@@ -1,7 +1,7 @@
 'use strict';
+const path = require('path');
 
-
-module.exports = {
+module.exports =appInfo=>( {
   mongo: {
     client: {
       host: '192.168.40.161',
@@ -11,6 +11,7 @@ module.exports = {
   },
   logger: {
     level: 'DEBUG',
+    dir: path.join(appInfo.baseDir, 'test-logs'),
     consoleLevel: 'DEBUG',
   },
-};
+});
