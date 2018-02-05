@@ -8,6 +8,7 @@ module.exports = app => {
   router.redirect('/', '/index.html', 302);
   router.get('/visual/resource', controller.resource.get);
   router.get(prefix + '/user/currentUser', controller.api.user.currentUser);
+  router.post(prefix + '/user/list', controller.api.user.list);
 
   //数据源路由
   dsRouter(app);
@@ -31,4 +32,10 @@ module.exports = app => {
   router.post(prefix + '/prototype/update', controller.api.prototypes.updatePrototype);
   router.get(prefix + '/prototype/meta/:id', controller.api.prototypes.getUiMeta);
   // End prototype
+
+  // Start projectized
+  router.post(prefix + '/projectized/list', controller.api.projectized.list);
+  router.post(prefix + '/projectized/member/save/:id', controller.api.projectized.saveProjectMember);
+  router.post(prefix + '/projectized/project/save', controller.api.projectized.saveProject)
+  // End projectized
 };

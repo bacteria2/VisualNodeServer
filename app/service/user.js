@@ -3,6 +3,12 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
 
+  async list(query){
+    const collection = this.app.mongo.db.collection('user');
+    const users = await collection.find(query).toArray();
+    return users;
+  }
+
   async findUserById(userid) {
     const collection = this.app.mongo.db.collection('user');
     const user = await collection.findOne({ userid });
