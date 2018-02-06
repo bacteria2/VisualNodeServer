@@ -68,8 +68,10 @@ class dcBaseService extends Service {
         this.checkStr(id,"ID");
         delete options._id;
         //判断你是否同名
-        const findOne =  await this.queryByOptions({_id:{$ne:new ObjectID(id)},name:options.name});
-        if(findOne) throw new Error('添加失败：存在相同的名称');
+        if(options.name) {
+            const findOne = await this.queryByOptions({ _id: { $ne: new ObjectID(id) }, name: options.name });
+            if (findOne) throw new Error('添加失败：存在相同的名称');
+        }
         const value = await this.app.mongo.db.collection(this.tablename).updateOne({_id:new ObjectID(id)}, {$set:options});
         const { result:{ok} } = value;
         return ok;

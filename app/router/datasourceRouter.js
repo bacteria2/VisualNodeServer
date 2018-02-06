@@ -15,7 +15,6 @@ module.exports = app => {
         router.post(myPrefix +'/update', myController.update);
     });
 
-
     const databaseController = controller.api.database;
     //查询数据源分类
     router.get(prefix + '/database/typeList', databaseController.typeList);
