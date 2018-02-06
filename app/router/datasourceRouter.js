@@ -4,7 +4,7 @@ module.exports = app => {
     const { router, controller, config: { restApi: { prefix } } } = app;
 
     //基础增删改查接口
-    const controllerKey = ['database','cube','cubeCategory'];
+    const controllerKey = ['database','cube','cubeCategory','mdx'];
     controllerKey.forEach(e=>{
         let myController = controller.api[e];
         let myPrefix = prefix + '/' + e ;
