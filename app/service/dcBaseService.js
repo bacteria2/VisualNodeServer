@@ -40,8 +40,10 @@ class dcBaseService extends Service {
 
     async insert(db) {
         this.checkObject(db,"保存数据不能为空");
-        const findOne =  await this.queryByOptions({name:db.name});
-        if(findOne) throw new Error('添加失败：存在相同的名称');
+        if(db.name){
+            const findOne =  await this.queryByOptions({name:db.name});
+            if(findOne) throw new Error('添加失败：存在相同的名称');
+        }
         const value = await this.app.mongo.db.collection(this.tablename).insertOne(db);
         const { insertedCount,insertedId } = value;
         if(insertedCount < 1)throw new Error('添加失败：服务器异常');
