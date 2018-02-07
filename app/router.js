@@ -9,6 +9,8 @@ module.exports = app => {
   router.get('/visual/resource', controller.resource.get);
   router.get(prefix + '/user/currentUser', controller.api.user.currentUser);
   router.post(prefix + '/user/list', controller.api.user.list);
+  router.post(prefix + '/user/save', controller.api.user.save);
+  router.post(prefix + '/user/updateStatus', controller.api.user.updateStatus);
 
   //数据源路由
   dsRouter(app);
