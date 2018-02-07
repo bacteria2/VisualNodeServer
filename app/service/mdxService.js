@@ -4,7 +4,7 @@ const dcBaseService = require('./dcBaseService');
 class cubeService extends dcBaseService {
 
     getTablename(){
-        return 'YDP_VISUAL_MDX';
+        return 'YDP_VISUAL_CUBE_SCHEMA';
     }
 
 }
