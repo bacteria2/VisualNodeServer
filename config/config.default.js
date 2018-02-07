@@ -22,7 +22,7 @@ module.exports = appInfo => {
 
   config.security = {
       csrf: {
-          ignoreJSON: true
+          ignoreJSON: true,
       }
   };
   //

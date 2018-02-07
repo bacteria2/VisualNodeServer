@@ -1,7 +1,8 @@
-'use strict';
+ 'use strict';
 
 const { app, assert } = require('egg-mock/bootstrap');
-const ejs = require('ejs'), fs = require('fs');
+const ejs = require('ejs'),
+  fs = require('fs');
 
 describe('test/app/service/mongocurd.test.js', () => {
   it('list user', async () => {

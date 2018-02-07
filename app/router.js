@@ -12,10 +12,16 @@ module.exports = app => {
   router.post(prefix + '/user/save', controller.api.user.save);
   router.post(prefix + '/user/updateStatus', controller.api.user.updateStatus);
 
+  // 登录校验
+  router.post(prefix+'/login/submit', app.passport.authenticate('local',{successRedirect :prefix+'/login/status'}));
+  // 获取当前登陆用户信息
+  router.get(prefix+'/login/status', controller.api.user.userLoginStatus);
+  //退出登陆
+  router.get(prefix+'/login/logout',controller.api.user.userLogout);
   //数据源路由
   dsRouter(app);
 
-  router.post(prefix + '/login/account', controller.api.user.accountLogin);
+  //router.post(prefix + '/login/account', controller.api.user.accountLogin);
   // Start widget
   router.get(prefix + '/widget/instance/:id', controller.api.widget.get);
   router.get(prefix + '/widget/list', controller.api.widget.getWidgetList);
