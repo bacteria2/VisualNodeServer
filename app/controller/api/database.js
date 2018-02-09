@@ -19,7 +19,7 @@ class DatabaseController extends dcBaseController {
             this.success(result);
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
     }
 

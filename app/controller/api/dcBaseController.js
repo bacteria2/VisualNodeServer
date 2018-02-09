@@ -23,7 +23,7 @@ class DatabaseController extends BaseController {
             this.success(result);
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
     }
 
@@ -33,7 +33,7 @@ class DatabaseController extends BaseController {
             this.success(result);
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
     }
 
@@ -44,7 +44,7 @@ class DatabaseController extends BaseController {
             this.success(result,'添加成功');
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
 
     }
@@ -55,7 +55,7 @@ class DatabaseController extends BaseController {
             this.success(result,'删除成功');
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
     }
 
@@ -65,7 +65,7 @@ class DatabaseController extends BaseController {
             this.success(result,'修改成功');
         }catch (e){
             this.error(null,e.message);
-            console.log(e.stack);
+            this.logger.error(e);
         }
     }
 }
