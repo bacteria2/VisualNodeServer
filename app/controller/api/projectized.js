@@ -5,8 +5,8 @@ const BaseController = require('../base');
 class ProjectizedController extends BaseController {
 
   async list(){
-    const { service, ctx } = this;
-    const response = await service.projectized.list(ctx.request.body);
+    const { service } = this;
+    const response = await service.projectized.queryMyProjects();
     if (response) {
       this.success(response);
     } else {
