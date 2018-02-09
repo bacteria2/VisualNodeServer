@@ -4,7 +4,13 @@ const ObjectId = require('mongodb').ObjectId;
 
 class UserService extends Service {
 
-  list(query){
+  list(form){
+    const {userType,name,...other} = form;
+    let types = [];
+    userType ? userType.forEach(t=>{types.push({userType:t})}) : null;
+    let query = {...other};
+    types.length > 0 ? query['$or'] = types : null;
+    name ? query.name= {'$regex': name} : null;
     const collection = this.app.mongo.db.collection('user');
     return collection.find(query,{password:0}).sort({updateTime:-1}).toArray();
   }

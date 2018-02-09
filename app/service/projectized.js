@@ -6,7 +6,8 @@ const ObjectID = require('mongodb').ObjectID;
 class ProjectizedService extends Service {
   queryMyProjects(){
     //查询项目经理是当前用户或者项目成员包含当前用户的项目
-    const query = {$or:[{'projectManager.userid':this.ctx.user.userid},{'members.userid':this.ctx.user.userid}]};
+    const userid = this.ctx.user && this.ctx.user.userid ? this.ctx.user.userid : '-1';
+    const query = {$or:[{'projectManager.userid': userid},{'members.userid': userid}]};
     const collection = this.app.mongo.db.collection('projects');
     return collection.find(query).toArray();
   }
