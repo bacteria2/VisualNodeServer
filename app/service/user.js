@@ -6,7 +6,7 @@ class UserService extends Service {
 
   async list(query){
     const collection = this.app.mongo.db.collection('user');
-    const users = await collection.find(query,{password:0}).sort({updateTime:1}).toArray();
+    const users = await collection.find(query,{password:0}).sort({updateTime:-1}).toArray();
     return users;
   }
 
