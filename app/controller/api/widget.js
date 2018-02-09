@@ -17,8 +17,8 @@ class WidgetController extends BaseController {
   }
 
   async getPropertyPage() {
-    const { service, ctx: { params } } = this;;
-    const i = params.index
+    const { service, ctx: { params } } = this;
+    const i = params.index;
     const page = await service.widget.getPropertyPage(params.name);
     if (page) {
       const defineStr = JSON.stringify(page.define).replace(/\${i}/g, i);
@@ -32,6 +32,7 @@ class WidgetController extends BaseController {
       const { service, ctx: { params } } = this;
       return  this.success(await service.widget.getWidgetList());
   }
+
 }
 
 module.exports = WidgetController;

@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 const dcBaseService = require('./dcBaseService');
 
 class cubeService extends dcBaseService {
