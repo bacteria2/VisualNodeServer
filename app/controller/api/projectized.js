@@ -27,11 +27,7 @@ class ProjectizedController extends BaseController {
   async saveProject(){
     const { service, ctx } = this;
     const response = await service.projectized.saveProject(ctx.request.body);
-    if (response) {
-      this.success(response);
-    } else {
-      this.error(response, '操作失败');
-    }
+    response?this.success(response):this.error(response, '操作失败');
   }
 }
 

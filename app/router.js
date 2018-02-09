@@ -21,6 +21,9 @@ module.exports = app => {
   //数据源路由
   dsRouter(app);
 
+  //authorization
+  router.get(prefix + '/authorization/list',controller.api.authorization.getAuthList);
+
   //router.post(prefix + '/login/account', controller.api.user.accountLogin);
   // Start widget
   router.get(prefix + '/widget/instance/:id', controller.api.widget.get);

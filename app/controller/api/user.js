@@ -4,12 +4,11 @@ const BaseController = require('../base');
 
 class UserController extends BaseController {
     async currentUser() {
-        const {service} = this;
-        const user = await service.user.findUserById('lpc');
-        if (user) {
-            this.success(user);
+        const {ctx} = this;
+        if (ctx.user) {
+            this.success(ctx.user);
         } else {
-            this.nonFound(null, 'id:100002 not found');
+            this.nonFound(null, 'user not login');
         }
     }
 

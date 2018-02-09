@@ -4,10 +4,9 @@ const ObjectId = require('mongodb').ObjectId;
 
 class UserService extends Service {
 
-  async list(query){
+  list(query){
     const collection = this.app.mongo.db.collection('user');
-    const users = await collection.find(query,{password:0}).sort({updateTime:-1}).toArray();
-    return users;
+    return collection.find(query,{password:0}).sort({updateTime:-1}).toArray();
   }
 
     findUserById(userid,project={}) {
@@ -58,7 +57,7 @@ class UserService extends Service {
     getUserLoginInfo(userid){
         const collection = this.app.mongo.db.collection('user');
         this.app.logger.info('get loginInfo userId:%s',userid);
-        return collection.findOne({userid,status:1},{userid:1,status:1,userType:1})
+        return collection.findOne({userid,status:1},{_id:0,avatar:1,notifyCount:1,name:1,userid:1,status:1,userType:1})
     }
 }
 
