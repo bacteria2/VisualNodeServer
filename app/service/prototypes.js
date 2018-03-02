@@ -36,11 +36,11 @@ class PrototypeService extends Service {
 
   async getUiMeta(id) {
     const collection = this.app.mongo.db.collection(collectionName);
-    const metaDefine = await collection.find({ _id: ObjectId(id) }, { _id: 0, optionMeta: 1, dataMeta: 1 }).next();
-    const { optionMeta: { normal, addable },dataMeta } = metaDefine;
-    const normalTempales = await this.service.template.getTemplatesByNames(normal);
-    const addableTempales = await this.service.template.getTemplatesByNames(addable);
-    return { optionMeta: { normal: normalTempales, addable: addableTempales }, dataMeta };
+    const metaDefine = await collection.find({ _id: ObjectId(id) }, { _id: 0,render:1, optionMeta: 1, dataMeta: 1 }).next();
+    const { optionMeta: { normal, addable },...otherMeta } = metaDefine;
+    const normalTemplate = await this.service.template.getTemplatesByNames(normal);
+    const addableTemplate = await this.service.template.getTemplatesByNames(addable);
+    return { optionMeta: { normal: normalTemplate, addable: addableTemplate },...otherMeta};
   }
 
 }
