@@ -57,7 +57,7 @@ class WidgetController extends BaseController {
           return  this.success(result);
       }catch (e){
           this.error(null,e.message);
-          this.app.logger.info(`复制实例失败：` + e.message());
+          this.app.logger.info(`复制实例失败：` + e.message);
       }
   }
 

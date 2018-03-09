@@ -73,7 +73,7 @@ class WidgetService extends Service {
          //处理新的实例
 
          //**//
-         widget._id = await insert(widget);
+         widget._id = await this.insert(widget);
          //返回新的实例
          return widget;
      }catch (e){
@@ -88,7 +88,7 @@ class WidgetService extends Service {
         }
         if(widget.name){
             // 判断同一个项目是否存在同名实例
-            const findOne =  await this.getWidget({name:widget.name,projectId:widget.projectId});
+            const findOne =  await this.app.mongo.db.collection('widgets').findOne({name: widget.name,projectId:widget.projectId});
             if(findOne) throw new Error('保存实例失败：存在相同的名称');
         }
         const value = await this.app.mongo.db.collection('widgets').insertOne(widget);
