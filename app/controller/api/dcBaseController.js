@@ -19,7 +19,7 @@ class DatabaseController extends BaseController {
 
     async list() {
         try{
-            const result = await this.myService.list();
+            const result = await this.myService.list(this.ctx.params.projectId);
             this.success(result);
         }catch (e){
             this.error(null,e.message);
@@ -46,7 +46,6 @@ class DatabaseController extends BaseController {
             this.error(null,e.message);
             this.logger.error(e);
         }
-
     }
 
     async deleteById() {

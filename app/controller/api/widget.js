@@ -33,6 +33,34 @@ class WidgetController extends BaseController {
       return  this.success(await service.widget.getWidgetList());
   }
 
+  async addWidget(){
+      const { service } = this;
+      try{
+          //合并原型，产生新的实例
+          const widget = await  service.widget.newWidgetByPrototype(this.body);
+          //保存新的实例
+          const result = await  service.widget.insert(widget);
+
+          this.success(result,'添加实例成功');
+      }catch (e){
+          this.error(null,e.message);
+          this.logger.error(e);
+      }
+  }
+
+  async copyWidget(){
+
+      const { service, ctx: { params } } = this;
+
+      try {
+          const result = await service.widget.copyWidget(params.widgetId,params.newName);
+          return  this.success(result);
+      }catch (e){
+          this.error(null,e.message);
+          this.app.logger.info(`复制实例失败：` + e.message());
+      }
+  }
+
   async deployInstance(){
       const { service, ctx: { params,request } } = this;
       try{
