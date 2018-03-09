@@ -8,7 +8,7 @@ module.exports = app => {
     controllerKey.forEach(e=>{
         let myController = controller.api[e];
         let myPrefix = prefix + '/' + e ;
-        router.get(myPrefix +'/list', myController.list);
+        router.get(myPrefix +'/list/:projectId', myController.list);
         router.get(myPrefix +'/getById/:id', myController.getById);
         router.get(myPrefix +'/deleteById/:id', myController.deleteById);
         router.post(myPrefix +'/insert', myController.insert);

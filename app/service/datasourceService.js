@@ -14,7 +14,7 @@ class databaseService extends dcBaseService {
 
     async typeList() {
         const dbCollection = this.app.mongo.db.collection('YDP_VISUAL_DSTYPE');
-        return await dbCollection.find({}).toArray();
+        return await dbCollection.find().toArray();
     }
 
 }

@@ -27,8 +27,10 @@ module.exports = app => {
   //router.post(prefix + '/login/account', controller.api.user.accountLogin);
   // Start widget
   router.get(prefix + '/widget/instance/:id', controller.api.widget.get);
+  router.get(prefix + '/widget/add', controller.api.widget.addWidget);
   router.get(prefix + '/widget/list', controller.api.widget.getWidgetList);
   router.get(prefix + '/widget/propertyPages/:name/:index', controller.api.widget.getPropertyPage);
+  router.get(prefix + '/widget/copyWidget/:widgetId/:newName', controller.api.widget.copyWidget);
   // End widget
   // Start template
   router.post(prefix + '/template/add', controller.api.template.addTemplate);

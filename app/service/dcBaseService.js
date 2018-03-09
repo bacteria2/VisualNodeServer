@@ -28,9 +28,11 @@ class dcBaseService extends Service {
         }
     };
 
-    async list() {
+    async list(projectId) {
+        const session = this.ctx.session;
+        console.log(session);
         const dbCollection = this.app.mongo.db.collection(this.tablename);
-        return await dbCollection.find({}).toArray();
+        return await dbCollection.find({projectId:projectId}).toArray();
     }
 
     async getById(id) {
@@ -41,7 +43,7 @@ class dcBaseService extends Service {
     async insert(db) {
         this.checkObject(db,"保存数据不能为空");
         if(db.name){
-            const findOne =  await this.queryByOptions({name:db.name});
+            const findOne =  await this.queryByOptions({name:db.name,projectId:db.projectId});
             if(findOne) throw new Error('添加失败：存在相同的名称');
         }
         const value = await this.app.mongo.db.collection(this.tablename).insertOne(db);
@@ -51,6 +53,7 @@ class dcBaseService extends Service {
             _id:insertedId.toString()
         };
     }
+
 
     async deleteById(id) {
         this.checkStr(id,'ID');
