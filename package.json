@@ -4,11 +4,13 @@
   "description": "Node server for Visual project",
   "private": true,
   "dependencies": {
-    "egg": "^2.0.0",
-    "egg-mongo-native": "^2.1.0",
+    "egg": "^2.4.1",
+    "egg-mongo-native": "^3.0.0-rc",
     "egg-passport": "^2.0.1",
     "egg-scripts": "^2.1.0",
     "koa2-history-api-fallback": "0.0.5",
+    "mysql2": "^1.5.2",
+    "oracledb": "^2.1.2",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {

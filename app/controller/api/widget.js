@@ -33,6 +33,17 @@ class WidgetController extends BaseController {
       return  this.success(await service.widget.getWidgetList());
   }
 
+  async deployInstance(){
+      const { service, ctx: { params,request } } = this;
+      try{
+          await service.widget.deployWidgetToDb(request.body,params.type);
+          this.success('deploy success')
+      }catch (error){
+          this.app.logger.error("deploy error %s",error);
+          this.error(null,'deploy failed')
+      }
+  }
+
 }
 
 module.exports = WidgetController;

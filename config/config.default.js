@@ -20,11 +20,7 @@ module.exports = appInfo => {
     prefix: '',
   };
 
-  config.security = {
-      csrf: {
-          ignoreJSON: true,
-      }
-  };
+
   //
   // config.cros = {
   //     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
