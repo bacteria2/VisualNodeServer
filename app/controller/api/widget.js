@@ -34,10 +34,10 @@ class WidgetController extends BaseController {
   }
 
   async addWidget(){
-      const { service } = this;
+      const { service,request} = this;
       try{
           //合并原型，产生新的实例
-          const widget = await  service.widget.newWidgetByPrototype(this.body);
+          const widget = await  service.widget.newWidgetByPrototype(request.body);
           //保存新的实例
           const result = await  service.widget.insert(widget);
 
@@ -71,6 +71,17 @@ class WidgetController extends BaseController {
           this.error(null,'deploy failed')
       }
   }
+
+    async deleteById() {
+        const { service, ctx: { params } } = this;
+        try{
+            const result = await service.widget.deleteById(params.id);
+            this.success(result,'删除成功');
+        }catch (e){
+            this.error(null,e.message);
+            this.logger.error(e);
+        }
+    }
 
 }
 

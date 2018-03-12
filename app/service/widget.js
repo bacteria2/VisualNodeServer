@@ -66,16 +66,34 @@ class WidgetService extends Service {
 
     /* 复制实例 */
    async copyWidget(srcWidgetId,newName){
+       if(!srcWidgetId || !newName){
+           throw new Error("复制实例失败，名称或实例ID为空");
+       }
      try{
          let widget = await this.getWidget(srcWidgetId);
-         delete widget._id;
-         widget.name = newName;
-         //处理新的实例
-
-         //**//
-         widget._id = await this.insert(widget);
-         //返回新的实例
-         return widget;
+         if(widget){
+             delete widget._id;
+             widget.name = newName;
+             //处理新的实例,复制序列样式,保存为 seriesCopyStyle
+             if(widget && widget.data && widget.data.series && widget.data.series.length > 0){
+                 widget.seriesCopyStyle = [];
+                 widget.data.series.forEach(e =>{
+                     let newSeries = {...e} ;
+                     delete newSeries.name;
+                     delete newSeries.type;
+                     delete newSeries.dataItemId;
+                     delete newSeries.encode;
+                     widget.seriesCopyStyle.push(newSeries);
+                 })
+             }
+             //**//
+             const result = await this.insert(widget);
+             widget._id = result._id;
+             //返回新的实例
+             return widget;
+         }else{
+             throw new Error("复制实例失败，未查询到源实例");
+         }
      }catch (e){
          throw e;
      }
@@ -102,9 +120,25 @@ class WidgetService extends Service {
     /*合并原型，生成新的实例*/
     async newWidgetByPrototype(options){
         let widget = {};
-
         return widget
     }
+
+    /* 删除实例 */
+    async deleteById(id) {
+        WidgetService.checkStr(id,'ID');
+        const {deletedCount} = await this.app.mongo.db.collection('widgets').deleteOne({_id:ObjectId(id)});
+        if(deletedCount < 1) throw new Error('删除实例失败：服务器异常');
+        return deletedCount;
+    }
+
+    static checkStr(str,fieldName){
+        if(!str || str === 'undefined' || str==='null' || typeof str !== 'string'){
+            throw new Error(fieldName + "不能为空");
+        }
+        if( typeof str !== 'string') {
+            throw new Error(fieldName + "数据类型错误" + typeof(str));
+        }
+    };
 }
 
 module.exports = WidgetService;
