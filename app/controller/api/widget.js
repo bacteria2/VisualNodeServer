@@ -29,18 +29,14 @@ class WidgetController extends BaseController {
   }
 
   async getWidgetList(){
-      const { service, ctx: { params } } = this;
-      return  this.success(await service.widget.getWidgetList());
+      const { service, ctx: { request:{req:{query}} } } = this;
+      return  this.success(await service.widget.getWidgetList(query));
   }
 
   async addWidget(){
-      const { service,request} = this;
+     const { service, ctx: { request:{body : {widget}} } } = this
       try{
-          //合并原型，产生新的实例
-          const widget = await  service.widget.newWidgetByPrototype(request.body);
-          //保存新的实例
           const result = await  service.widget.insert(widget);
-
           this.success(result,'添加实例成功');
       }catch (e){
           this.error(null,e.message);
@@ -82,6 +78,21 @@ class WidgetController extends BaseController {
             this.logger.error(e);
         }
     }
+
+ async saveWidget(){
+      const { service, ctx: { request:{body : {widgetId,widget}} } } = this;
+      const result = await service.widget.saveWidget(widgetId,widget);
+     if (result.result.ok === 1) {
+         this.success('');
+     } else {
+         this.error('', '修改失败');
+     }
+  }
+
+ /* async addWidget(){
+        const { service, ctx: { request:{body : {widget}} } } = this;
+        return await service.widget.addWidget(widget);
+  }*/
 
 }
 

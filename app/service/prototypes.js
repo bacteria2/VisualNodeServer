@@ -29,7 +29,7 @@ class PrototypeService extends Service {
     const collection = this.app.mongo.db.collection(collectionName);
     const id = prototype._id;
     delete prototype._id;
-    const resp = await collection.updateOne({ _id: ObjectId(id) }, { $set: prototype });
+    const resp = await collection.updateOne({ _id: ObjectId(id) }, { $set: {...prototype} });
     this.app.logger.info(`update succeuss count:r${resp.modifiedCount}`);
     return resp;
   }

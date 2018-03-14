@@ -2,13 +2,15 @@
   "name": "VisualNodeServer",
   "version": "1.0.0",
   "description": "Node server for Visual project",
-  "private": true,
+  "private": false,
   "dependencies": {
     "egg": "^2.4.1",
     "egg-mongo-native": "^3.0.0-rc",
     "egg-passport": "^2.0.1",
     "egg-scripts": "^2.1.0",
+    "immutable": "^4.0.0-rc.9",
     "koa2-history-api-fallback": "0.0.5",
+    "lodash.isnull": "^3.0.0",
     "mysql2": "^1.5.2",
     "oracledb": "^2.1.2",
     "passport-local": "^1.0.0"
