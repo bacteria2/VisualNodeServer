@@ -44,7 +44,7 @@ module.exports = app => {
   // End template
   // Start prototype
   router.post(prefix + '/prototype/add', controller.api.prototypes.addPrototype);
-  router.post(prefix + '/prototype/getAll', controller.api.prototypes.getPrototypes);
+  router.get(prefix + '/prototype/getAll', controller.api.prototypes.getPrototypes);
   router.post(prefix + '/prototype/getPrototypeById', controller.api.prototypes.getPrototypeById);
   router.post(prefix + '/prototype/update', controller.api.prototypes.updatePrototype);
   router.get(prefix + '/prototype/meta/:id', controller.api.prototypes.getUiMeta);

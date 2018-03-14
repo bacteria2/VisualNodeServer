@@ -15,8 +15,8 @@ class PrototypeController extends BaseController {
   }
 
   async getPrototypes() {
-    const { service, ctx } = this;
-    const response = await service.prototypes.getPrototypes(ctx.request.body);
+    const { service ,ctx:{request:{req:{query}} }} = this;
+    const response = await service.prototypes.getPrototypes(query);
     if (response) {
       this.success(response);
     } else {

@@ -4,6 +4,7 @@ const Service = require('egg').Service;
 const ObjectId = require('mongodb').ObjectId;
 const { deployWidget }=require('../utils/deploy');
 const Immutable =  require('immutable')
+const { handlePaginationQuery } = require('../utils/queryUtils')
 
 
 class WidgetService extends Service {
@@ -12,29 +13,10 @@ class WidgetService extends Service {
     }
 
    async getWidgetList(queryObject) {
-        const {page = 1,pageSize =7} = queryObject,skip = (page - 1) * pageSize
-        this.handleQueryParams(queryObject)
-        const collection = this.app.mongo.db.collection('widgets');
-        let cursor = collection.find(queryObject), total = await cursor.count(),
-        list = await cursor.project({_id: 1, updateTime: 1, description: 1, name: 1})
-            .sort([['updateTime',-1]])
-            .skip(skip)
-            .limit(pageSize*1).toArray()
-        return {total,list};
-    }
-
-    handleQueryParams(queryObject){
-        delete queryObject.page
-        delete queryObject.pageSize
-        Object.keys(queryObject).forEach(key => {
-            if(!queryObject[key]){
-                delete queryObject[key]
-            }
-        } )
-        if(queryObject.name){
-            //like %name% 并且 不区分大小写
-            queryObject.name = {$regex:queryObject.name,$options:"$i"}
-        }
+       const project = {_id: 1, updateTime: 1, description: 1, name: 1},
+              sort = [['updateTime',-1]],
+              collection = this.app.mongo.db.collection('widgets');
+        return await handlePaginationQuery({queryObject,project,sort,collection});
     }
 
     async getPropertyPage(pageName) {

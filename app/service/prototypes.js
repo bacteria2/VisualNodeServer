@@ -2,6 +2,7 @@
 const Service = require('egg').Service;
 const ObjectId = require('mongodb').ObjectID;
 const collectionName = 'prototypes';
+const { handlePaginationQuery } = require('../utils/queryUtils')
 
 
 class PrototypeService extends Service {
@@ -12,10 +13,10 @@ class PrototypeService extends Service {
     return prototype;
   }
 
-  async getPrototypes() {
-    const collection = this.app.mongo.db.collection(collectionName);
-    const prototypes = await collection.find().toArray();
-    return prototypes;
+  async getPrototypes(queryObject) {
+      const project = {_id: 1, name: 1},
+            collection = this.app.mongo.db.collection(collectionName);
+      return await handlePaginationQuery({queryObject,project,collection});
   }
 
   async addPrototype(prototype) {
