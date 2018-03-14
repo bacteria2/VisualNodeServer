@@ -29,6 +29,16 @@ class ProjectizedController extends BaseController {
     const response = await service.projectized.saveProject(ctx.request.body);
     response?this.success(response):this.error(response, '操作失败');
   }
+
+  async deleteProject(){
+    const { service, ctx } = this;
+    const response = await service.projectized.deleteProject(ctx.params.id);
+    if (response) {
+      this.success(response);
+    } else {
+      this.error(response, '操作失败');
+    }
+  }
 }
 
 module.exports = ProjectizedController;

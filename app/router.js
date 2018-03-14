@@ -51,6 +51,7 @@ module.exports = app => {
   // Start projectized
   router.get(prefix + '/projectized/list', controller.api.projectized.list);
   router.post(prefix + '/projectized/member/save/:id', controller.api.projectized.saveProjectMember);
-  router.post(prefix + '/projectized/project/save', controller.api.projectized.saveProject)
+  router.post(prefix + '/projectized/project/save', controller.api.projectized.saveProject);
+  router.post(prefix + '/projectized/project/delete/:id', controller.api.projectized.deleteProject);
   // End projectized
 };
