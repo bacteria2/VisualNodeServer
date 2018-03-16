@@ -12,7 +12,9 @@ class cubeService extends dcBaseService {
         let cubeList = await dbCollection.find({}).toArray();
         //关联查询cube的数据源 和 分类信息
         cubeList = cubeList.map(e=>{
-            e.conn = this.service.datasourceService.getById(e.connId);
+            if(e.connType !== 'bean'){
+                e.conn = this.service.datasourceService.getById(e.connId);
+            }
             e.category = this.service.cubeCategoryService.getById(e.categoryId);
             return e;
         });
