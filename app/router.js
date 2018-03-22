@@ -35,6 +35,7 @@ module.exports = app => {
   router.post(prefix + '/widget/add',controller.api.widget.addWidget);
   router.post(prefix + '/widget/deploy/:type', controller.api.widget.deployInstance);
   router.get(prefix + '/widget/copyWidget/:widgetId/:newName', controller.api.widget.copyWidget);
+  router.get(prefix + '/widget/getAll', controller.api.widget.getAllWidgets);
   // End widget
   // Start template
   router.post(prefix + '/template/add', controller.api.template.addTemplate);

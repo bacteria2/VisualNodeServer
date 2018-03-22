@@ -19,6 +19,12 @@ class WidgetService extends Service {
         return await handlePaginationQuery({queryObject, project, sort, collection});
     }
 
+    async getAllWidgets(queryObject) {
+        const project = {_id: 1, updateTime: 1, description: 1, name: 1,deployTime:1},
+              collection = this.app.mongo.db.collection('widgets');
+        return await collection.find(queryObject).project(project)
+    }
+
     async getPropertyPage(pageName) {
         return await this.service.template.getTemplateByName({name: pageName});
     }

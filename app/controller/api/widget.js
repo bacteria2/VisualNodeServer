@@ -33,6 +33,11 @@ class WidgetController extends BaseController {
       return  this.success(await service.widget.getWidgetList(query));
   }
 
+  async getAllWidgets(){
+        const { service, ctx: { request:{req:{query}} } } = this;
+        return  this.success(await service.widget.getAllWidgets(query));
+  }
+
   async addWidget(){
      const { service, ctx: { request:{body : {widget}} } } = this
       try{
